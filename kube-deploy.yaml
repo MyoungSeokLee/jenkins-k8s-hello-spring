@@ -1,0 +1,41 @@
+#Service for hello-spring node port
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-hello-spring
+spec:
+  selector:
+    run: hello-spring
+  type: NodePort
+  ports:
+  - port: 8081
+    protocol: TCP
+    targetPort: 8081
+    nodePort: 30000
+---
+#Deployment for hello-spring demo
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-spring
+spec:
+  selector:
+    matchLabels:
+      run: hello-spring
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: hello-spring
+    spec:
+      containers:
+      - name: hello-spring
+        image: dlaudtjr03/hello-spring
+        ports:
+        - containerPort: 8081
+        imagePullPolicy: "Always"
+      imagePullSecrets:
+      - name: regcred
+---
+
+
