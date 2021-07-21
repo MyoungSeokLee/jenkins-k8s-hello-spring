@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: hello-spring
-        image: dlaudtjr03/hello-spring
+        image: REPOSITORY_NAME
         ports:
         - containerPort: 8081
         imagePullPolicy: "Always"
